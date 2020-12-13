@@ -4,7 +4,7 @@ import Products from "./containers/Products";
 
 const App = () => {
   return (
-    <div className="App">
+    <div id="App" className="App">
       <Products />
     </div>
   );

@@ -1,9 +1,16 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from './App';
+// Libraries
+import React from "react";
+import { shallow } from "enzyme";
+// Target
+import Target from "./App";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe("Unit Test:", () => {
+  let target: any = undefined;
+  beforeEach(() => {
+    target = shallow(<Target />);
+  });
+
+  it("should render without crashing.", () => {
+    expect(target.find("#App")).toHaveLength(1);
+  });
 });

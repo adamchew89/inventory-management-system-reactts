@@ -12,14 +12,13 @@ interface IProductsProps {
 
 interface IProductsState {}
 
-class Products extends Component<IProductsProps, IProductsState> {
+export class Products extends Component<IProductsProps, IProductsState> {
   componentDidMount() {
     this.props.getProductList();
   }
 
   render() {
-    console.log(this.props);
-    return <div>test</div>;
+    return <div id="Products">test</div>;
   }
 }
 
