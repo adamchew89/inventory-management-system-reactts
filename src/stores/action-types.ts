@@ -1,0 +1,6 @@
+// Products
+export const PRODUCT_START = "PRODUCT_START";
+export const PRODUCT_STOP = "PRODUCT_STOP";
+// Get Product List
+export const PRODUCT_GET_LIST_SUCCEED = "PRODUCT_GET_LIST_SUCCEED";
+export const PRODUCT_GET_LIST_FAILED = "PRODUCT_GET_LIST_FAILED";
