@@ -1,5 +1,6 @@
 {
   "name": "ims-reactjs",
+  "author": "Adam Chew",
   "version": "0.1.0",
   "private": true,
   "scripts": {
