@@ -4,15 +4,20 @@ import { connect } from "react-redux";
 // ActionCreators
 import * as actionProduct from "../stores/actions/action-product";
 
-interface IProductsProps {
+export interface IProps {
   // ActionCreators
   getProductList: Function;
-  // Props
+  // Stores
+  productStore: Object;
 }
 
-interface IProductsState {}
+export const isIProps = (arg: any): arg is IProps => {
+  if (!(arg.getProductList instanceof Function)) return false;
+  if (!(arg.productStore instanceof Object)) return false;
+  return true;
+};
 
-export class Products extends Component<IProductsProps, IProductsState> {
+export class Products extends Component<IProps> {
   componentDidMount() {
     this.props.getProductList();
   }
@@ -23,7 +28,7 @@ export class Products extends Component<IProductsProps, IProductsState> {
 }
 
 const mapStateToProps = (state: any) => {
-  return { productstore: state.productStore };
+  return { productStore: state.productStore };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
