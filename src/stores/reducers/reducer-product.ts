@@ -2,13 +2,19 @@
 // ActionTypes
 import * as actionTypes from "../action-types";
 
-const initialState = {
+export const initialState = {
   loading: false,
   products: [],
-  errorMessage: undefined,
+  errorMessage: "",
 };
 
-const reducerProduct = (state = initialState, action) => {
+interface ActionObject {
+  type?: string;
+  payload?: any;
+  error?: string;
+}
+
+const reducerProduct = (state = initialState, action: ActionObject) => {
   const newState = { ...state };
   switch (action.type) {
     case actionTypes.PRODUCT_START:
@@ -23,7 +29,7 @@ const reducerProduct = (state = initialState, action) => {
       break;
     case actionTypes.PRODUCT_GET_LIST_SUCCEED:
       newState.products = action.payload;
-      newState.errorMessage = undefined;
+      newState.errorMessage = "";
       break;
     default:
       break;

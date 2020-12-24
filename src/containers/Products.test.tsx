@@ -37,9 +37,13 @@ describe("Type Checking:", () => {
   });
 
   it("should invalidate if type requirement is not fulfilled.", () => {
+    const faultyProps: any = {
+      getProductList: () => {},
+      productStore: { dummy: "test" },
+    };
     // Clone the baseProps
-    const faultyBaseProps1 = { ...baseProps };
-    const faultyBaseProps2 = { ...baseProps };
+    const faultyBaseProps1 = { ...faultyProps };
+    const faultyBaseProps2 = { ...faultyProps };
     // Remove a required property from baseProps clone
     delete faultyBaseProps1.getProductList;
     delete faultyBaseProps2.productStore;

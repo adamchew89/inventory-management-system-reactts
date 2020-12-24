@@ -5,10 +5,11 @@ import { connect } from "react-redux";
 import * as actionProduct from "../stores/actions/action-product";
 
 export interface IProps {
+  // Stores
+  store?: Object;
+  productStore: Object;
   // ActionCreators
   getProductList: Function;
-  // Stores
-  productStore: Object;
 }
 
 export const isIProps = (arg: any): arg is IProps => {
