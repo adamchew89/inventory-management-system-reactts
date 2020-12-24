@@ -8,6 +8,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test:local": "npm run test -- --coverage --watchAll --coveragePathIgnorePatterns /src/index.tsx /src/reportWebVitals.ts",
+    "test:ci": "CI=true npm run test -- --coverage --watchAll --coveragePathIgnorePatterns /src/index.tsx /src/reportWebVitals.ts",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
