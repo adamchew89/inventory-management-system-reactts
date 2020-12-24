@@ -4,7 +4,7 @@ import { shallow } from "enzyme";
 // Target
 import Target, { Products as TargetDC, IProps, isIProps } from "./Products";
 // Stores
-import baseStore from "../stores/store";
+import baseStore from "../../stores/store";
 
 describe("Unit Test:", () => {
   // Base Props

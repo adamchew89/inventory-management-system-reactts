@@ -3,7 +3,7 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import { Typography } from "@material-ui/core";
 // ActionCreators
-import * as actionProduct from "../stores/actions/action-product";
+import * as actionProduct from "../../stores/actions/action-product";
 
 export interface IProps {
   // Stores
