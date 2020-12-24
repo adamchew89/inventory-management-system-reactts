@@ -1,6 +1,7 @@
 // Libraries
 import { Component } from "react";
 import { connect } from "react-redux";
+import { Typography } from "@material-ui/core";
 // ActionCreators
 import * as actionProduct from "../stores/actions/action-product";
 
@@ -24,7 +25,11 @@ export class Products extends Component<IProps> {
   }
 
   render() {
-    return <div id="Products">test</div>;
+    return (
+      <div id="Products">
+        <Typography variant="h1">test</Typography>
+      </div>
+    );
   }
 }
 
