@@ -5,6 +5,8 @@ node_js:
 cache:
   directories:
   - node_modules
+env: 
+  - CI=true
 branches:
   only:
     - master
@@ -12,7 +14,7 @@ branches:
 install:
   - npm install
 script:
-  - npm run test:ci
+  - npm run test
   - npm run build
 deploy:  
   on:
