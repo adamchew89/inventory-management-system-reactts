@@ -7,7 +7,7 @@ export interface IProps {
 
 const Navigation = (props: IProps) => {
   return (
-    <ul>
+    <ul id="Navigation">
       {props.routes.map((route) => (
         <li>
           <Link to={route.link}>{route.label}</Link>

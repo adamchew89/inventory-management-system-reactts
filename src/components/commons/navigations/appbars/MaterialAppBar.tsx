@@ -1,12 +1,16 @@
 // Libraries
-import { AppBar } from "@material-ui/core";
+import { Box, AppBar } from "@material-ui/core";
 
 interface IProps {
   children: any;
 }
 
 const MaterialAppBar = (props: IProps) => {
-  return <AppBar position="relative">{props.children}</AppBar>;
+  return (
+    <Box id="MaterialAppBar">
+      <AppBar position="relative">{props.children}</AppBar>
+    </Box>
+  );
 };
 
 export default MaterialAppBar;
