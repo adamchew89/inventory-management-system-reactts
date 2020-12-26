@@ -5,7 +5,9 @@ import { shallow } from "enzyme";
 import Target from "./Navigation";
 
 describe("Unit Test:", () => {
-  const baseProps = { routes: [] };
+  const baseProps = {
+    routes: [{ name: "Test", link: "/test", label: "Test" }],
+  };
   let target: any = undefined;
   beforeEach(() => {
     target = shallow(<Target {...baseProps} />);
@@ -13,5 +15,9 @@ describe("Unit Test:", () => {
 
   it("should render without crashing.", () => {
     expect(target.find("#Navigation")).toHaveLength(1);
+  });
+
+  it("should render one list item.", () => {
+    expect(target.find("li")).toHaveLength(1);
   });
 });

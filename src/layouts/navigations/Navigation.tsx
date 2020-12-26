@@ -9,7 +9,7 @@ const Navigation = (props: IProps) => {
   return (
     <ul id="Navigation">
       {props.routes.map((route) => (
-        <li>
+        <li key={route.name}>
           <Link to={route.link}>{route.label}</Link>
         </li>
       ))}
