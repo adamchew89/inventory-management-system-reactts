@@ -5,12 +5,15 @@ import { shallow } from "enzyme";
 import Target, { Products as TargetDC, IProps, isIProps } from "./Products";
 // Stores
 import baseStore from "../../stores/store";
+import { initialState } from "../../stores/reducers/reducer-product";
+// Components (Common)
+import MaterialTable from "../../components/commons/tables/MaterialTable";
 
 describe("Unit Test:", () => {
   // Base Props
   const baseProps: IProps = {
     getProductList: jest.fn(),
-    productStore: { dummy: "test" },
+    productStore: initialState,
   };
   let target: any = undefined;
   beforeEach(() => {
@@ -24,13 +27,36 @@ describe("Unit Test:", () => {
   it("should execute componentDidMount lifecycle methods.", () => {
     expect(baseProps.getProductList).toHaveBeenCalled();
   });
+
+  it("should return #ProductNotAvailable element if 'products' is empty.", () => {
+    expect(target.find("#ProductNotAvailable")).toHaveLength(1);
+  });
+
+  it("should return MaterialTable element if 'products' is not empty.", () => {
+    const modifiedProps = { ...baseProps };
+    modifiedProps.productStore.products = [
+      {
+        product: "Yoga Pants",
+        detail: "Yoga pants for ladies.",
+        cost: 19.9,
+        retail: 79.9,
+        width: 0.2,
+        depth: 0.2,
+        height: 0.05,
+        weight: 0.3,
+        _links: {},
+      },
+    ];
+    target = shallow(<TargetDC {...modifiedProps} />);
+    expect(target.find(MaterialTable)).toHaveLength(1);
+  });
 });
 
 describe("Type Checking:", () => {
   // Base Props
   const baseProps: IProps = {
     getProductList: () => {},
-    productStore: { dummy: "test" },
+    productStore: initialState,
   };
   it("should validate if type requirement is fulfilled.", () => {
     expect(isIProps(baseProps)).toBeTruthy();
@@ -39,7 +65,7 @@ describe("Type Checking:", () => {
   it("should invalidate if type requirement is not fulfilled.", () => {
     const faultyProps: any = {
       getProductList: () => {},
-      productStore: { dummy: "test" },
+      productStore: initialState,
     };
     // Clone the baseProps
     const faultyBaseProps1 = { ...faultyProps };

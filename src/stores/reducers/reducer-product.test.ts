@@ -6,7 +6,7 @@ import * as actionTypes from "../action-types";
 
 describe("Unit Test:", () => {
   it("should return default state.", () => {
-    const action = { type: undefined };
+    const action = { type: "" };
     const state = ProductReducers(undefined, action);
     expect(state).toMatchObject(initialState);
   });
@@ -24,7 +24,7 @@ describe("Unit Test:", () => {
   });
 
   it(`should set errorMessage and clear products when action type: ${actionTypes.PRODUCT_GET_LIST_FAILED}.`, () => {
-    const action = { type: actionTypes.PRODUCT_GET_LIST_FAILED };
+    const action = { type: actionTypes.PRODUCT_GET_LIST_FAILED, error: "Error" };
     const state = ProductReducers(undefined, action);
     expect(state.products).toMatchObject([]);
     expect(state.errorMessage.length).toBeGreaterThan(0);

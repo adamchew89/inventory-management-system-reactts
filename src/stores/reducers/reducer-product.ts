@@ -8,13 +8,7 @@ export const initialState = {
   errorMessage: "",
 };
 
-interface ActionObject {
-  type?: string;
-  payload?: any;
-  error?: string;
-}
-
-const reducerProduct = (state = initialState, action: ActionObject) => {
+const reducerProduct = (state = initialState, action: IActionObject) => {
   const newState = { ...state };
   switch (action.type) {
     case actionTypes.PRODUCT_START:
@@ -25,7 +19,7 @@ const reducerProduct = (state = initialState, action: ActionObject) => {
       break;
     case actionTypes.PRODUCT_GET_LIST_FAILED:
       newState.products = [];
-      newState.errorMessage = "Unable to retrieve product list.";
+      newState.errorMessage = action.error;
       break;
     case actionTypes.PRODUCT_GET_LIST_SUCCEED:
       newState.products = action.payload;
