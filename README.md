@@ -1,5 +1,27 @@
 # Inventory Management System Web Front-End (React Typescript)
 
+# Getting started
+
+## Docker
+
+To build a docker image of the project, execute the following commands in a terminal:
+
+```
+<!-- For development/test version -->
+docker build -t ims-reactts -f Dockerfile .
+<!-- For production version -->
+docker build -t ims-reactts-prod -f Dockerfile.prod .
+```
+
+To run a container instance of the project, execute the following commands in a terminal:
+
+```
+<!-- For development/test version -->
+docker run --name ims-reactts-instance -p 3000:3000 ims-reactts
+<!-- For production version -->
+docker run --name ims-reactts-prod-instance -p 80:80 ims-reactts-prod
+```
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
