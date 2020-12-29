@@ -6,6 +6,7 @@ export const initialState = {
   loading: false,
   products: [],
   errorMessage: "",
+  page: {},
 };
 
 const reducerProduct = (state = initialState, action: IActionObject) => {
@@ -19,10 +20,11 @@ const reducerProduct = (state = initialState, action: IActionObject) => {
       break;
     case actionTypes.PRODUCT_GET_LIST_FAILED:
       newState.products = [];
-      newState.errorMessage = action.error;
+      newState.errorMessage = action.payload;
       break;
     case actionTypes.PRODUCT_GET_LIST_SUCCEED:
-      newState.products = action.payload;
+      newState.products = action.payload._embedded.products;
+      newState.page = action.payload.page;
       newState.errorMessage = "";
       break;
     default:

@@ -22,11 +22,18 @@ interface IRoute {
 interface IActionObject {
   type: string;
   payload?: any;
-  error?: string;
 }
 
 interface IProductStore {
   loading: boolean;
   products: IProduct[];
+  page: IPage;
   errorMessage?: string;
+}
+
+interface IPage {
+  size: number;
+  totalElements: number;
+  totalPages: number;
+  number: number;
 }

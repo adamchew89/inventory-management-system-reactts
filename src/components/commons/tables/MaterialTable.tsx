@@ -1,20 +1,31 @@
 // Libraries
 import {
-  TableContainer,
   Table,
+  TableContainer,
   TableHead,
   TableBody,
-  TableRow,
+  TableFooter,
   TableCell,
+  TableRow,
 } from "@material-ui/core";
+// Components (Common)
+import MaterialPagination from "./paginations/MaterialPagination";
 
 export interface IProps {
   rows: any[];
+  rowsPerPage: number;
+  page: number;
+  handleChangePage: (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number
+  ) => void;
+  handleChangeRowsPerPage: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
 }
 
 const MaterialTable = (props: IProps) => {
-  const { rows } = props;
-  const headings = Object.keys(rows[0]);
+  const headings = Object.keys(props.rows[0]);
   return (
     <TableContainer id="MaterialTable">
       <Table>
@@ -36,6 +47,17 @@ const MaterialTable = (props: IProps) => {
             </TableRow>
           ))}
         </TableBody>
+        <TableFooter>
+          <TableRow>
+            <MaterialPagination
+              rows={props.rows}
+              rowsPerPage={props.rowsPerPage}
+              page={props.page}
+              handleChangePage={props.handleChangePage}
+              handleChangeRowsPerPage={props.handleChangeRowsPerPage}
+            />
+          </TableRow>
+        </TableFooter>
       </Table>
     </TableContainer>
   );

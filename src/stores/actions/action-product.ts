@@ -10,7 +10,7 @@ const getProductList = () => (dispatch: Dispatch) => {
   return httpProduct
     .get("/")
     .then((response) =>
-      dispatch(updateProducts(response.data._embedded.products))
+      dispatch(updateProducts(response.data))
     )
     .catch((error) => dispatch(clearProducts(error.message)))
     .finally(() => dispatch(stopProductLoad()));
@@ -27,7 +27,7 @@ const updateProducts = (products: IProduct[]) => ({
 
 const clearProducts = (message: string) => ({
   type: actionTypes.PRODUCT_GET_LIST_FAILED,
-  error: message,
+  payload: message,
 });
 
 export {
