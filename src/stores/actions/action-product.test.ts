@@ -42,12 +42,12 @@ describe("Unit Test:", () => {
   it(`should return action type: ${actionTypes.PRODUCT_GET_LIST_FAILED}`, () => {
     expect(ProductActions.clearProducts("test")).toMatchObject({
       type: actionTypes.PRODUCT_GET_LIST_FAILED,
-      error: "test",
+      payload: "test",
     });
   });
 
   it("should trigger multiple actions on getProductList call on success", () => {
-    const mockResponse = { _embedded: { products: [] } };
+    const mockResponse = { test: "test" };
     http.onGet("/").reply(200, mockResponse);
     return store.dispatch(ProductActions.getProductList()).then(() => {
       expect(store.getActions()[0]).toEqual({
@@ -55,7 +55,7 @@ describe("Unit Test:", () => {
       });
       expect(store.getActions()[1]).toEqual({
         type: actionTypes.PRODUCT_GET_LIST_SUCCEED,
-        payload: [],
+        payload: mockResponse,
       });
       expect(store.getActions()[2]).toEqual({
         type: actionTypes.PRODUCT_STOP,
@@ -71,7 +71,7 @@ describe("Unit Test:", () => {
       });
       expect(store.getActions()[1]).toEqual({
         type: actionTypes.PRODUCT_GET_LIST_FAILED,
-        error: "Request failed with status code 500",
+        payload: "Request failed with status code 500",
       });
       expect(store.getActions()[2]).toEqual({
         type: actionTypes.PRODUCT_STOP,

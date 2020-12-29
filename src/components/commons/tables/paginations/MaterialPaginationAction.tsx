@@ -49,8 +49,9 @@ const MaterialPaginationAction = (props: IProps) => {
   };
 
   return (
-    <Box className={classes.root}>
+    <Box id="MaterialPaginationAction" className={classes.root}>
       <IconButton
+        id="FirstPageButton"
         onClick={handleFirstPageButtonClick}
         disabled={page === 0}
         aria-label="first page"
@@ -58,6 +59,7 @@ const MaterialPaginationAction = (props: IProps) => {
         <FirstPageIcon />
       </IconButton>
       <IconButton
+        id="PreviousPageButton"
         onClick={handleBackButtonClick}
         disabled={page === 0}
         aria-label="previous page"
@@ -65,6 +67,7 @@ const MaterialPaginationAction = (props: IProps) => {
         <KeyboardArrowLeft />
       </IconButton>
       <IconButton
+        id="NextPageButton"
         onClick={handleNextButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="next page"
@@ -72,6 +75,7 @@ const MaterialPaginationAction = (props: IProps) => {
         <KeyboardArrowRight />
       </IconButton>
       <IconButton
+        id="LastPageButton"
         onClick={handleLastPageButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="last page"

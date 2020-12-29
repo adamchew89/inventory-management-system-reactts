@@ -20,6 +20,7 @@ const reducerProduct = (state = initialState, action: IActionObject) => {
       break;
     case actionTypes.PRODUCT_GET_LIST_FAILED:
       newState.products = [];
+      newState.page = {};
       newState.errorMessage = action.payload;
       break;
     case actionTypes.PRODUCT_GET_LIST_SUCCEED:

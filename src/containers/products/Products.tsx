@@ -2,15 +2,14 @@
 import { Component, MouseEvent, ChangeEvent } from "react";
 import { connect } from "react-redux";
 import { Box, Typography } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
+// Styles
+import classes from "./Product.module.css";
 // ActionCreators
 import * as actionProduct from "../../stores/actions/action-product";
 // Components
 import MaterialTable from "../../components/commons/tables/MaterialTable";
 
 export interface IProps {
-  // Styles
-  classes: any;
   // Stores
   store?: Object;
   productStore: IProductStore;
@@ -22,12 +21,6 @@ export const isIProps = (arg: any): arg is IProps => {
   if (!(arg.getProductList instanceof Function)) return false;
   if (!(arg.productStore instanceof Object)) return false;
   return true;
-};
-
-const styles = {
-  root: {
-    width: "100%",
-  },
 };
 
 export class Products extends Component<IProps> {
@@ -76,7 +69,7 @@ export class Products extends Component<IProps> {
 
   render() {
     return (
-      <Box id="Products" className={this.props.classes.root}>
+      <Box id="Products" className={classes.Product}>
         <Typography variant="h1">Products</Typography>
         {this.generateTable()}
       </Box>
@@ -92,7 +85,4 @@ const mapDispatchToProps = (dispatch: any) => {
   return { getProductList: () => dispatch(actionProduct.getProductList()) };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(styles)(Products));
+export default connect(mapStateToProps, mapDispatchToProps)(Products);

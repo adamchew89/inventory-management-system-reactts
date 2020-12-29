@@ -27,13 +27,6 @@ interface IActionObject {
 interface IProductStore {
   loading: boolean;
   products: IProduct[];
-  page: IPage;
+  page: Object;
   errorMessage?: string;
-}
-
-interface IPage {
-  size: number;
-  totalElements: number;
-  totalPages: number;
-  number: number;
 }

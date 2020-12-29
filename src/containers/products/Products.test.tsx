@@ -50,6 +50,18 @@ describe("Unit Test:", () => {
     target = shallow(<TargetDC {...modifiedProps} />);
     expect(target.find(MaterialTable)).toHaveLength(1);
   });
+
+  it("should update 'page' when handleChangePage is triggered.", () => {
+    const mockPage = 10;
+    target.find(MaterialTable).props().handleChangePage(null, mockPage);
+    expect(target.state("page")).toBe(mockPage);
+  });
+
+  it("should update 'rowsPerPage' when handleChangeRowsPerPage is triggered.", () => {
+    const mockEvent = { target: { value: 10 } };
+    target.find(MaterialTable).props().handleChangeRowsPerPage(mockEvent);
+    expect(target.state("rowsPerPage")).toBe(mockEvent.target.value);
+  });
 });
 
 describe("Type Checking:", () => {
