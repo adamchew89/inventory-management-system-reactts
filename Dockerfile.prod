@@ -1,0 +1,19 @@
+# Docker environment
+FROM node:14.15.3-alpine as build-stage
+# Designate work directory
+WORKDIR /app
+# Copy configuration files
+COPY package.json ./
+# Install dependencies
+RUN npm install
+# Copy project files
+COPY ./ .
+# Build
+RUN npm run build
+
+# production stage
+FROM nginx:stable-alpine as production-stage
+COPY --from=build-stage /app/build /usr/share/nginx/html
+COPY --from=build-stage /app/default.conf /etc/nginx/conf.d/
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

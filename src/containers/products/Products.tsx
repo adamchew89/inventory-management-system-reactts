@@ -1,14 +1,18 @@
 // Libraries
-import { Component } from "react";
+import { Component, MouseEvent, ChangeEvent } from "react";
 import { connect } from "react-redux";
-import { Typography } from "@material-ui/core";
+import { Box, Typography } from "@material-ui/core";
+// Styles
+import classes from "./Product.module.css";
 // ActionCreators
 import * as actionProduct from "../../stores/actions/action-product";
+// Components
+import MaterialTable from "../../components/commons/tables/MaterialTable";
 
 export interface IProps {
   // Stores
   store?: Object;
-  productStore: Object;
+  productStore: IProductStore;
   // ActionCreators
   getProductList: Function;
 }
@@ -20,15 +24,55 @@ export const isIProps = (arg: any): arg is IProps => {
 };
 
 export class Products extends Component<IProps> {
+  state = { rowsPerPage: 1, page: 0 };
+
   componentDidMount() {
     this.props.getProductList();
   }
 
+  handleChangePage = (
+    event: MouseEvent<HTMLButtonElement> | null,
+    newPage: number
+  ) => {
+    this.setState({ page: newPage });
+  };
+
+  handleChangeRowsPerPage = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    this.setState({ rowsPerPage: parseInt(event.target.value, 10), page: 0 });
+  };
+
+  generateTable = () => {
+    // Return not found message
+    if (this.props.productStore.products.length === 0) {
+      return (
+        <Typography id="ProductNotAvailable">No products available.</Typography>
+      );
+    }
+    // Remove unwanted attributes from IProduct for display
+    const products = this.props.productStore.products.map((p) => {
+      const { _links, ...product } = p;
+      return product;
+    });
+    // Return generated table
+    return (
+      <MaterialTable
+        rows={products}
+        rowsPerPage={this.state.rowsPerPage}
+        page={this.state.page}
+        handleChangePage={this.handleChangePage}
+        handleChangeRowsPerPage={this.handleChangeRowsPerPage}
+      />
+    );
+  };
+
   render() {
     return (
-      <div id="Products">
-        <Typography variant="h1">test</Typography>
-      </div>
+      <Box id="Products" className={classes.Product}>
+        <Typography variant="h1">Products</Typography>
+        {this.generateTable()}
+      </Box>
     );
   }
 }

@@ -6,15 +6,10 @@ export const initialState = {
   loading: false,
   products: [],
   errorMessage: "",
+  page: {},
 };
 
-interface ActionObject {
-  type?: string;
-  payload?: any;
-  error?: string;
-}
-
-const reducerProduct = (state = initialState, action: ActionObject) => {
+const reducerProduct = (state = initialState, action: IActionObject) => {
   const newState = { ...state };
   switch (action.type) {
     case actionTypes.PRODUCT_START:
@@ -25,10 +20,12 @@ const reducerProduct = (state = initialState, action: ActionObject) => {
       break;
     case actionTypes.PRODUCT_GET_LIST_FAILED:
       newState.products = [];
-      newState.errorMessage = "Unable to retrieve product list.";
+      newState.page = {};
+      newState.errorMessage = action.payload;
       break;
     case actionTypes.PRODUCT_GET_LIST_SUCCEED:
-      newState.products = action.payload;
+      newState.products = action.payload._embedded.products;
+      newState.page = action.payload.page;
       newState.errorMessage = "";
       break;
     default:
