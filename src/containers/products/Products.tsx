@@ -1,6 +1,7 @@
 // Libraries
 import { Component, MouseEvent, ChangeEvent } from "react";
 import { connect } from "react-redux";
+import { AxiosRequestConfig } from "axios";
 import { Box, Typography } from "@material-ui/core";
 // Styles
 import classes from "./Product.module.css";
@@ -24,23 +25,32 @@ export const isIProps = (arg: any): arg is IProps => {
 };
 
 export class Products extends Component<IProps> {
-  state = { rowsPerPage: 1, page: 0 };
+  state = { rowsPerPage: 1, page: 0, sort: "product,asc" };
 
   componentDidMount() {
-    this.props.getProductList();
+    this.handleRefreshTable();
   }
 
   handleChangePage = (
     event: MouseEvent<HTMLButtonElement> | null,
     newPage: number
   ) => {
-    this.setState({ page: newPage });
+    this.setState({ page: newPage }, this.handleRefreshTable);
   };
 
   handleChangeRowsPerPage = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    this.setState({ rowsPerPage: parseInt(event.target.value, 10), page: 0 });
+    this.setState(
+      { rowsPerPage: parseInt(event.target.value, 10), page: 0 },
+      this.handleRefreshTable
+    );
+  };
+
+  handleRefreshTable = () => {
+    const { page, sort, rowsPerPage: size } = this.state;
+    const options = { params: { page, sort, size } };
+    this.props.getProductList(options);
   };
 
   generateTable = () => {
@@ -61,6 +71,7 @@ export class Products extends Component<IProps> {
         rows={products}
         rowsPerPage={this.state.rowsPerPage}
         page={this.state.page}
+        count={this.props.productStore.page.totalElements}
         handleChangePage={this.handleChangePage}
         handleChangeRowsPerPage={this.handleChangeRowsPerPage}
       />
@@ -82,7 +93,10 @@ const mapStateToProps = (state: any) => {
 };
 
 const mapDispatchToProps = (dispatch: any) => {
-  return { getProductList: () => dispatch(actionProduct.getProductList()) };
+  return {
+    getProductList: (options: AxiosRequestConfig | undefined) =>
+      dispatch(actionProduct.getProductList(options)),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);

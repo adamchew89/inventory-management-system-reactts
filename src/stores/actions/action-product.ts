@@ -1,17 +1,16 @@
 // Libraries
+import { AxiosRequestConfig } from "axios";
 import { Dispatch } from "redux";
 // ActionTypes
 import * as actionTypes from "../action-types";
 // HTTPs
 import httpProduct from "../https/http-product";
 
-const getProductList = () => (dispatch: Dispatch) => {
+const getProductList = (options: AxiosRequestConfig | undefined) => (dispatch: Dispatch) => {
   dispatch(startProductLoad());
   return httpProduct
-    .get("/")
-    .then((response) =>
-      dispatch(updateProducts(response.data))
-    )
+    .get(`/`, options)
+    .then((response) => dispatch(updateProducts(response.data)))
     .catch((error) => dispatch(clearProducts(error.message)))
     .finally(() => dispatch(stopProductLoad()));
 };

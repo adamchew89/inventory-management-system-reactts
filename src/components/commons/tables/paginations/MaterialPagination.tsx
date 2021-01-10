@@ -7,6 +7,7 @@ export interface IProps {
   rows: any[];
   rowsPerPage: number;
   page: number;
+  count: number;
   handleChangePage: (
     event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number
@@ -21,7 +22,7 @@ const MaterialPagination = (props: IProps) => {
     <TablePagination
       rowsPerPageOptions={[1, 5, 10, 25, { label: "All", value: -1 }]}
       colSpan={Object.keys(props.rows[0]).length}
-      count={props.rows.length}
+      count={props.count}
       rowsPerPage={props.rowsPerPage}
       page={props.page}
       SelectProps={{

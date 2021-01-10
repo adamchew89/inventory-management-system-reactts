@@ -1,4 +1,5 @@
 // Libraries
+import { MouseEvent, ChangeEvent } from "react";
 import {
   Table,
   TableContainer,
@@ -15,12 +16,13 @@ export interface IProps {
   rows: any[];
   rowsPerPage: number;
   page: number;
+  count: number;
   handleChangePage: (
-    event: React.MouseEvent<HTMLButtonElement> | null,
+    event: MouseEvent<HTMLButtonElement> | null,
     newPage: number
   ) => void;
   handleChangeRowsPerPage: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
 }
 
@@ -53,6 +55,7 @@ const MaterialTable = (props: IProps) => {
               rows={props.rows}
               rowsPerPage={props.rowsPerPage}
               page={props.page}
+              count={props.count}
               handleChangePage={props.handleChangePage}
               handleChangeRowsPerPage={props.handleChangeRowsPerPage}
             />
